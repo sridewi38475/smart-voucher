@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMART VOUCHER — Mini ISP Sekolah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Dekorasi Awan Melayang -->
+  <div class="cloud cloud-1" aria-hidden="true"></div>
+  <div class="cloud cloud-2" aria-hidden="true"></div>
+  <div class="cloud cloud-3" aria-hidden="true"></div>
+
+  <main class="app-wrapper">
+    <header class="app-header">
+      <div class="badge-pill">☁️ TeFa TKJ • Mini ISP Sekolah</div>
+      <h1>Smart Voucher</h1>
+      <p>Sistem Kasir Voucher Internet Cepat &amp; Otomatis</p>
+    </header>
+
+    <div class="content-grid">
+      <!-- Kartu Kiri: Form Kasir + Daftar Harga -->
+      <section class="card form-card">
+        <h2>📝 Input Kasir Transaksi</h2>
+
+        <form id="kasir-form" class="kasir-form">
+          <div class="input-group">
+            <label for="in-nama">Nama Pelanggan</label>
+            <input type="text" id="in-nama" placeholder="Contoh: Budi Santoso" value="  Budi Santoso  " required>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="in-kelas">Kelas</label>
+              <input type="text" id="in-kelas" placeholder="XI TKJ 1" value="XI TKJ 1" required>
+            </div>
+            <div class="input-group">
+              <label for="in-nomor">Nomor Urut</label>
+              <input type="text" id="in-nomor" placeholder="001" value="001" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="in-paket">Pilih Paket Voucher</label>
+            <select id="in-paket">
+              <option value="1 Jam|2000">⏱️ Voucher 1 Jam — Rp2.000</option>
+              <option value="3 Jam|5000">⚡ Voucher 3 Jam — Rp5.000</option>
+              <option value="1 Hari|10000" selected>🌤️ Voucher 1 Hari — Rp10.000</option>
+              <option value="7 Hari|25000">🌈 Voucher 7 Hari — Rp25.000</option>
+              <option value="30 Hari|75000">🚀 Voucher 30 Hari — Rp75.000</option>
+            </select>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="in-jumlah">Jumlah Beli</label>
+              <input type="number" id="in-jumlah" min="1" value="3" required>
+            </div>
+            <div class="input-group">
+              <label for="in-bayar">Uang Pembayaran (Rp)</label>
+              <input type="number" id="in-bayar" min="0" step="500" value="50000" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btn-proses">
+            ✨ Proses &amp; Cetak Struk
+          </button>
+        </form>
+
+        <div class="promo-box">
+          <p>🎉 <strong>Promo Pelajar:</strong> Diskon otomatis <strong>5%</strong> + biaya admin <strong>Rp1.000</strong>!</p>
+        </div>
+
+        <div class="avg-box">
+          <span>📊 Rata-rata 5 Paket:</span>
+          <strong id="rata-rata-harga">-</strong>
+        </div>
+      </section>
+
+      <!-- Kartu Kanan: Struk Transaksi Digital -->
+      <section class="card receipt-card">
+        <div class="receipt-top">
+          <span class="receipt-icon">🧾</span>
+          <h2>Struk Pembayaran</h2>
+          <span class="trx-badge" id="out-kode">-</span>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <div class="receipt-rows">
+          <div class="row">
+            <span class="label">Nama Pelanggan</span>
+            <span class="value bold" id="out-nama">-</span>
+          </div>
+          <div class="row">
+            <span class="label">Panjang Karakter Nama</span>
+            <span class="value" id="out-panjang-nama">-</span>
+          </div>
+          <div class="row">
+            <span class="label">Kelas</span>
+            <span class="value" id="out-kelas">-</span>
+          </div>
+          <div class="row">
+            <span class="label">Jenis Voucher</span>
+            <span class="value pill-blue" id="out-voucher">-</span>
+          </div>
+          <div class="row">
+            <span class="label">Harga Satuan</span>
+            <span class="value" id="out-harga">-</span>
+          </div>
+          <div class="row">
+            <span class="label">Jumlah Beli</span>
+            <span class="value" id="out-jumlah">-</span>
+          </div>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <div class="receipt-rows">
+          <div class="row">
+            <span class="label">Subtotal</span>
+            <span class="value" id="out-subtotal">-</span>
+          </div>
+          <div class="row discount">
+            <span class="label">Diskon (5%)</span>
+            <span class="value" id="out-diskon">-</span>
+          </div>
+          <div class="row">
+            <span class="label">Biaya Administrasi</span>
+            <span class="value" id="out-admin">-</span>
+          </div>
+        </div>
+
+        <div class="total-banner">
+          <span>Total Pembayaran</span>
+          <strong id="out-total">-</strong>
+        </div>
+
+        <div class="receipt-rows payment-section">
+          <div class="row">
+            <span class="label">Uang Pembayaran</span>
+            <span class="value" id="out-bayar">-</span>
+          </div>
+          <div class="row change">
+            <span class="label">Uang Kembalian</span>
+            <span class="value" id="out-kembalian">-</span>
+          </div>
+        </div>
+
+        <div class="summary-note" id="out-ringkasan">
+          Silakan isi form di samping lalu klik "Proses &amp; Cetak Struk".
+        </div>
+
+        <div class="receipt-footer">
+          Terima kasih telah menggunakan WiFi Mini ISP ☁️💙
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
